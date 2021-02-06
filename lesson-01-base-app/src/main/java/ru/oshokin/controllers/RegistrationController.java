@@ -1,8 +1,5 @@
 package ru.oshokin.controllers;
 
-import ru.oshokin.entities.SystemUser;
-import ru.oshokin.entities.User;
-import ru.oshokin.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ru.oshokin.entities.SystemUser;
+import ru.oshokin.entities.User;
+import ru.oshokin.services.UserService;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
+
     private UserService userService;
 
     @Autowired
@@ -55,8 +56,9 @@ public class RegistrationController {
             logger.debug("User name already exists.");
             return "registration-form";
         }
-        userService.save(theSystemUser);
+        userService.createNewUser(theSystemUser);
         logger.debug("Successfully created user: " + userName);
         return "registration-confirmation";
     }
+
 }

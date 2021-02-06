@@ -1,5 +1,3 @@
-<!--/*@thymesVar id="studentsList" type="java.util.List<com.geekbrains.entities.Student>"*/-->
-
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
@@ -52,7 +50,7 @@
 <!-- Headline -->
 <div class="container">
 
-    <table class="table">
+    <table class="table" th:unless="${#lists.isEmpty(productsList)}">
         <thead>
         <tr class="thead-dark">
             <td>Id</td>
@@ -67,6 +65,9 @@
             <td th:text="${product.price}"/>
         </tr>
     </table>
+    <div th:if="${#lists.isEmpty(productsList)}">
+        <br>Surprise, motherfucker! Return here month later!
+    </div>
 </div>
 
 <!--===============================================================================================-->

@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "roles")
 public class Role {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -27,4 +28,5 @@ public class Role {
 	public String toString() {
 		return "Role{" + "id=" + id + ", name='" + name + '\'' + '}';
 	}
+
 }

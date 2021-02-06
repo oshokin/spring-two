@@ -1,8 +1,10 @@
 package ru.oshokin.repositories;
 
-import ru.oshokin.entities.Role;
 import org.springframework.data.repository.CrudRepository;
+import ru.oshokin.entities.Role;
 
 public interface RoleRepository extends CrudRepository<Role, Long> {
+
 	Role findOneByName(String theRoleName);
+
 }

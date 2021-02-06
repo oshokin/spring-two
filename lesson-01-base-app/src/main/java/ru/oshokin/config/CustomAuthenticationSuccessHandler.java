@@ -1,11 +1,11 @@
 package ru.oshokin.config;
 
-import ru.oshokin.entities.User;
-import ru.oshokin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import ru.oshokin.entities.User;
+import ru.oshokin.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
     private UserService userService;
 
     @Autowired
@@ -33,4 +34,5 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		session.setAttribute("user", theUser);
 		response.sendRedirect(request.getContextPath() + "/");
 	}
+
 }

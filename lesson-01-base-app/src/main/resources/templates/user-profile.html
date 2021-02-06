@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="|O.Shokin Store. Editing ${user.userName}|">Oleg Shokin Store</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.png}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{fonts/iconic/css/material-design-iconic-font.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/animate/animate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/css-hamburgers/hamburgers.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/animsition/css/animsition.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/util.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+
+<body>
+
+<div th:replace="~{navigation :: navi(AdminDashboard)}" />
+
+<div class="container">
+    <br>
+    <form th:action="@{/admin/update-user}" th:method="post" th:object="${user}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label>User name</label>
+            <input type="text" class="form-control" th:field="*{userName}" placeholder="Enter username">
+            <small th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username shouldn't be blank</small>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" th:field="*{password}" placeholder="Enter password">
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password shouldn't be blank</small>
+        </div>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" th:field="*{firstName}" placeholder="Enter first name">
+            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name shouldn't be blank</small>
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" th:field="*{lastName}" placeholder="Enter last name">
+            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First name shouldn't be blank</small>
+        </div>
+        <div class="form-group">
+            <label>E-mail</label>
+            <input type="text" class="form-control" th:field="*{email}" placeholder="Enter e-mail">
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail shouldn't be blank</small>
+        </div>
+        <div class="form-group">
+            <label for="roles">Roles</label>
+            <select multiple class="form-control" id="roles" th:field="*{roles}" required>
+                <option th:each="role : *{roles}"
+                        th:text="${role.name}"
+                        th:value="${role.id}"
+                        th:selected="${user.roles?.contains(role)}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
+
+<script type="text/javascript" th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
