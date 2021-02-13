@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "courses")
 public class Course {
+
     public final static int PROJECT_NAME_MAX_LENGTH = 255;
 
     @Id
@@ -53,4 +54,5 @@ public class Course {
 
     public Course() {
     }
+
 }

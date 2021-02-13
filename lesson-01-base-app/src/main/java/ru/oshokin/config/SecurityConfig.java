@@ -1,6 +1,5 @@
 package ru.oshokin.config;
 
-import ru.oshokin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.oshokin.services.UserService;
 
 import javax.sql.DataSource;
 
@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     private DataSource dataSource;
     private UserService userService;
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -71,4 +72,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
+
 }

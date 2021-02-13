@@ -1,10 +1,5 @@
 package ru.oshokin.services;
 
-import ru.oshokin.repositories.RoleRepository;
-import ru.oshokin.repositories.UserRepository;
-import ru.oshokin.entities.SystemUser;
-import ru.oshokin.entities.Role;
-import ru.oshokin.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,13 +8,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.oshokin.entities.Role;
+import ru.oshokin.entities.SystemUser;
+import ru.oshokin.entities.User;
+import ru.oshokin.repositories.RoleRepository;
+import ru.oshokin.repositories.UserRepository;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	private BCryptPasswordEncoder passwordEncoder;
@@ -47,7 +49,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void save(SystemUser systemUser) {
+	public User findById(Long id) {
+		return userRepository.findOneById(id);
+	}
+
+	@Override
+	@Transactional
+	public List<User> getAllUsers() {
+		return (List<User>) userRepository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public void createNewUser(SystemUser systemUser) {
 		User user = new User();
 		user.setUserName(systemUser.getUserName());
 		user.setPassword(passwordEncoder.encode(systemUser.getPassword()));
@@ -57,6 +71,12 @@ public class UserServiceImpl implements UserService {
 
 		user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_EMPLOYEE")));
 
+		userRepository.save(user);
+	}
+
+	@Override
+	@Transactional
+	public void save(User user) {
 		userRepository.save(user);
 	}
 
@@ -74,4 +94,5 @@ public class UserServiceImpl implements UserService {
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
+
 }
