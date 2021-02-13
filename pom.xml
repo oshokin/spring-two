@@ -15,5 +15,6 @@
     </properties>
     <modules>
         <module>lesson-01-base-app</module>
+        <module>lesson-02</module>
     </modules>
 </project>
