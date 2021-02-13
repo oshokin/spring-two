@@ -1,16 +1,17 @@
 package ru.oshokin.repositories;
 
-import ru.oshokin.entities.Student;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import ru.oshokin.entities.Student;
 
 import java.util.List;
 
 @Repository
 public interface StudentsRepository extends PagingAndSortingRepository<Student, Long> {
+
     @Query(value = "SELECT s.id\n" +
             "FROM students s\n" +
             "LEFT JOIN students_courses c on s.id = c.student_id\n" +
@@ -22,4 +23,5 @@ public interface StudentsRepository extends PagingAndSortingRepository<Student, 
     List<Student> getStudentsByCoursesCountDescHQL(Pageable pageable);
 
     Student findOneById(Long id);
+
 }

@@ -1,16 +1,17 @@
 package ru.oshokin.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.oshokin.entities.Course;
 import ru.oshokin.entities.Student;
 import ru.oshokin.repositories.StudentsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StudentsService {
+
     private StudentsRepository studentsRepository;
     private CoursesService coursesService;
 
@@ -66,4 +67,5 @@ public class StudentsService {
         student.getCourses().remove(course);
         studentsRepository.save(student);
     }
+
 }

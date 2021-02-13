@@ -1,16 +1,19 @@
 package ru.oshokin.entities;
 
-import ru.oshokin.validation.FieldMatch;
-import ru.oshokin.validation.ValidEmail;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.oshokin.validation.FieldMatch;
+import ru.oshokin.validation.ValidEmail;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
 @FieldMatch(first = "password", second = "matchingPassword", message = "The password fields must match")
 public class SystemUser {
+
     @NotNull(message = "not null check")
     @Size(min = 3, message = "username length must be greater than 2 symbols")
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 letters/digits")
@@ -37,8 +40,4 @@ public class SystemUser {
     @Size(min = 1, message = "is required")
     private String email;
 
-//    @NotNull
-//    @Min(value = 0, message = "value must be greater or equals than 0")
-//    @Max(value = 10, message = "value must be lesser or equals than 10")
-//    private Integer count;
 }

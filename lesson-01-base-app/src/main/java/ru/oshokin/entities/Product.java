@@ -13,18 +13,20 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @NotNull(message = "Title not null")
-    @Size(min = 6, message = "Title legth min 5 sym")
+    @Size(min = 6, message = "Title length cannot be less than 5")
     @Column(name = "title")
     private String title;
 
-    @NotNull(message = "price not null")
+    @NotNull(message = "Price shouldn''t be empty")
     @Min(value = 1, message = "Min 1")
     @Column(name = "price")
     private double price;
+
 }

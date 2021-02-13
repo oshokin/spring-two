@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "students")
 public class Student {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,4 +57,5 @@ public class Student {
     public String toString() {
         return "Student id=" + id + ", courses=" + courses.size() + '}';
     }
+
 }

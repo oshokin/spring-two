@@ -1,15 +1,16 @@
 package ru.oshokin.services;
 
-import ru.oshokin.entities.Course;
-import ru.oshokin.repositories.CoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.oshokin.entities.Course;
+import ru.oshokin.repositories.CoursesRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CoursesService {
+
     private CoursesRepository coursesRepository;
 
     @Autowired
@@ -28,4 +29,5 @@ public class CoursesService {
         }
         return null;
     }
+
 }

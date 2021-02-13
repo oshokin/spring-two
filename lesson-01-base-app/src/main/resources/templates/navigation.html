@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
@@ -45,17 +44,6 @@
     <div class="topbar">
         <div class="content-topbar container h-100">
             <div class="left-topbar">
-						<!--<span class="left-topbar-item flex-wr-s-c" th:classappend="${activeTab == 'Home' ? 'active' : ''}">-->
-							<!--<span th:href="@{/}">-->
-								<!--New York, NY-->
-							<!--</span>-->
-
-							<!--&lt;!&ndash;<img class="m-b-1 m-rl-8" src="images/icons/icon-night.png" alt="IMG">&ndash;&gt;-->
-
-							<!--&lt;!&ndash;<span>&ndash;&gt;-->
-								<!--&lt;!&ndash;HI 58° LO 56°&ndash;&gt;-->
-							<!--&lt;!&ndash;</span>&ndash;&gt;-->
-						<!--</span>-->
 
                 <li><a class="left-topbar-item"
                        th:classappend="${activeTab == 'Home' ? 'left-topbar-item-active' : ''}"
@@ -72,28 +60,11 @@
                        th:href="@{/products/list}">Product List<span class="sr-only">(current)</span></a>
                 </li>
 
-                <li><a class="left-topbar-item"
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="left-topbar-item"
                        th:classappend="${activeTab == 'Admin' ? 'left-topbar-item-active' : ''}"
                        th:href="@{/admin}">Admin Dashboard</a>
                 </li>
 
-
-
-                <!--<a href="#"  class="left-topbar-item">-->
-                    <!--About-->
-                <!--</a>-->
-
-                <!--<a href="#" class="left-topbar-item">-->
-                    <!--Contact-->
-                <!--</a>-->
-
-                <!--<a href="#" class="left-topbar-item">-->
-                    <!--Sing up-->
-                <!--</a>-->
-
-                <!--<a href="#" class="left-topbar-item">-->
-                    <!--Log in-->
-                <!--</a>-->
             </div>
 
             <div class="right-topbar">
@@ -130,44 +101,3 @@
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
 </body>
-
-
-
-<!--<div class="fluid-container" th:fragment="navi(activeTab)">-->
-    <!--<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">-->
-        <!--<a class="navbar-brand" href="#">GeekSpring</a>-->
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"-->
-                <!--aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-            <!--<span class="navbar-toggler-icon"></span>-->
-        <!--</button>-->
-        <!--<div class="collapse navbar-collapse" id="navbarNav">-->
-            <!--<ul class="navbar-nav">-->
-                <!--<li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">-->
-                    <!--<a class="nav-link" th:href="@{/}">Home<span class="sr-only">(current)</span></a>-->
-                <!--</li>-->
-                <!--<li sec:authorize="hasRole('ADMIN')" class="nav-item">-->
-                    <!--<a class="nav-link" th:href="@{/admin}">Admin Dashboard</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item" th:classappend="${activeTab == 'StudentsList' ? 'active' : ''}">-->
-                    <!--<a class="nav-link" th:href="@{/students/list}">Students List</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link disabled" href="#">Disabled</a>-->
-                <!--</li>-->
-
-                <!--<div sec:authorize="isAuthenticated()">-->
-                    <!--<li class="nav-item">-->
-                        <!--<form th:action="@{/logout}" method="POST">-->
-                            <!--<input type="submit" class="btn btn-danger" value="Logout"/>-->
-                        <!--</form>-->
-                    <!--</li>-->
-                <!--</div>-->
-                <!--&lt;!&ndash;<div sec:authorize="isAnonymous()">&ndash;&gt;-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</nav>-->
-    <!--<div class="visible-md" style="height:80px;"></div>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
