@@ -2,7 +2,9 @@ package com.geekbrains.springbootproject.controllers;
 
 import com.geekbrains.springbootproject.entities.Order;
 import com.geekbrains.springbootproject.entities.User;
-import com.geekbrains.springbootproject.services.*;
+import com.geekbrains.springbootproject.services.DeliveryAddressService;
+import com.geekbrains.springbootproject.services.OrderService;
+import com.geekbrains.springbootproject.services.UserService;
 import com.geekbrains.springbootproject.utils.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
