@@ -1,5 +1,6 @@
 package ru.oshokin.store.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,8 +25,8 @@ public class Order {
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
 
-    @Column(name = "status")
-    @Enumerated
+    @ManyToOne
+    @JoinColumn(name = "status_id")
     private OrderStatus status;
 
     @Column(name = "price")
@@ -51,4 +52,8 @@ public class Order {
     @Column(name = "update_at")
     @CreationTimestamp
     private LocalDateTime updateAt;
+
+    @JsonIgnore
+    @Transient
+    private boolean confirmed;
 }

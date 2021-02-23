@@ -1,56 +1,34 @@
 package ru.oshokin.store.services;
 
 import ru.oshokin.store.entities.Product;
-import ru.oshokin.store.repositories.ProductsRepository;
-import ru.oshokin.store.repositories.specifications.ProductSpecs;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import ru.oshokin.store.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.oshokin.store.repositories.specifications.ProductSpecs;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class ProductsServiceImpl implements ProductsService {
-
-    private ProductsRepository productsRepository;
+public class ProductServiceImpl implements ProductService {
+    private ProductRepository productRepository;
 
     @Autowired
-    public void setProductsRepository(ProductsRepository productsRepository) {
-        this.productsRepository = productsRepository;
-    }
-
-    @Override
-    public Product findByTitle(String title) {
-        return productsRepository.findOneByTitle(title);
-    }
-
-    @Override
-    public Product findById(Long id) {
-        return productsRepository.findById(id).orElse(null);
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     public List<Product> getAllProducts() {
-        return (List<Product>) productsRepository.findAll();
+        return (List<Product>)(productRepository.findAll());
     }
 
-    public Page<Product> getProductsByCost(Pageable pageable, Double min, Double max) {
-        if (min == null) {
-            min = 0.0;
-        }
-        if (max == null) {
-            max = Double.MAX_VALUE;
-        }
-        return productsRepository.findAllByPriceBetween(pageable, min, max);
+    @Override
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -90,12 +68,16 @@ public class ProductsServiceImpl implements ProductsService {
         int page = (int) parameters.get("page");
         int size = (int) parameters.get("size");
 
-        return productsRepository.findAll(spec, PageRequest.of(page - 1, size));
+        return productRepository.findAll(spec, PageRequest.of(page - 1, size));
     }
 
     @Override
-    public Product saveOrUpdate(Product product) {
-        return productsRepository.save(product);
+    public boolean isProductWithTitleExists(String productTitle) {
+        return productRepository.findOneByTitle(productTitle) != null;
     }
 
+    @Override
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
+
 <body>
 <div class="container">
     <br>
@@ -17,6 +18,7 @@
             <th style="padding: 20px; text-align: center;">Стоимость</th>
         </tr>
         </thead>
+
         <tbody>
         <tr th:each="orderItem, iterStat : ${order.orderItems}">
             <td style="border-top: 1px solid #dee2e6; padding: 20px; text-align: center;"
@@ -36,6 +38,7 @@
         <td style="padding: 20px; font-style: italic;" th:utext="'<b>' + ${order.price}+ '</b>'"></td>
         </tfoot>
     </table>
+
     <p>Благодарим за выбор нашей площадки</p>
 </div>
 </body>
