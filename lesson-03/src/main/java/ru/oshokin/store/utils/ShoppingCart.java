@@ -2,39 +2,19 @@ package ru.oshokin.store.utils;
 
 import ru.oshokin.store.entities.OrderItem;
 import ru.oshokin.store.entities.Product;
-import ru.oshokin.store.services.ProductsService;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCart {
-    private ProductsService productsService;
-
-    @Autowired
-    public void setProductsService(ProductsService productsService) {
-        this.productsService = productsService;
-    }
-
     private List<OrderItem> items;
     private Double totalCost;
 
     public ShoppingCart() {
         items = new ArrayList<>();
         totalCost = 0.0;
-    }
-
-    public void add(Long productId) {
-        Product product = productsService.findById(productId);
-        this.add(product);
     }
 
     public void add(Product product) {

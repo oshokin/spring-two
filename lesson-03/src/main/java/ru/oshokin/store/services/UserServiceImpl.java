@@ -3,6 +3,7 @@ package ru.oshokin.store.services;
 import ru.oshokin.store.entities.Role;
 import ru.oshokin.store.entities.SystemUser;
 import ru.oshokin.store.entities.User;
+import ru.oshokin.store.repositories.RoleGrpcRepository;
 import ru.oshokin.store.repositories.RoleRepository;
 import ru.oshokin.store.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
+    private RoleGrpcRepository roleGrpcRepository;
+
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,6 +35,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public void setRoleRepository(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
+    }
+
+    @Autowired
+    public void setRepository(RoleGrpcRepository roleGrpcRepository) {
+        this.roleGrpcRepository = roleGrpcRepository;
     }
 
     @Autowired
@@ -60,7 +68,8 @@ public class UserServiceImpl implements UserService {
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
 
-        user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_EMPLOYEE")));
+
+        user.setRoles(Arrays.asList(roleGrpcRepository.findOneByName("ROLE_EMPLOYEE")));
 
         userRepository.save(user);
         return true;
