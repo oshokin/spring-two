@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
 <head>
     <meta charset="utf-8"/>
-
     <title>Корзина</title>
-
     <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
 </head>
-
 <body>
-
 <div th:replace="~{navigation :: navi(Cart)}"/>
-
 <div class="container">
     <br>
     <h1>Корзина</h1>
-
     <div th:if="${cart.getItems().size() > 0}" >
         <table class="table table-hover">
             <thead class="thead-dark">
@@ -52,16 +42,13 @@
             </tbody>
         </table>
         <br>
-
-        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{/shop/order/fill}">Продолжить оформление заказа</a>
+        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{/order/fill}">Продолжить оформление заказа</a>
         <a sec:authorize="isAnonymous()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#authWarningModal">Продолжить оформление заказа</a>
-
     </div>
     <div th:unless="${cart.getItems().size() > 0}" >
         <span>Ваша корзина пуста</span>
     </div>
 </div>
-
 <div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -77,6 +64,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
