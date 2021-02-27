@@ -1,9 +1,9 @@
 package ru.oshokin.store.services;
 
-import ru.oshokin.store.entities.DeliveryAddress;
-import ru.oshokin.store.repositories.DeliveryAddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.oshokin.store.entities.DeliveryAddress;
+import ru.oshokin.store.repositories.DeliveryAddressRepository;
 
 import java.util.List;
 

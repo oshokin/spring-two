@@ -15,7 +15,7 @@ import java.util.Locale;
 
 @Configuration
 @PropertySource("classpath:private.properties")
-@ComponentScan("com.geekbrains.geekmarketwinter")
+@ComponentScan("ru.oshokin.store")
 public class AppConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         if (!registry.hasMappingForPattern("/images/**")) {

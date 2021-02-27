@@ -1,12 +1,12 @@
 package ru.oshokin.store.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.oshokin.store.entities.Order;
 import ru.oshokin.store.entities.OrderItem;
 import ru.oshokin.store.entities.User;
 import ru.oshokin.store.repositories.OrderRepository;
 import ru.oshokin.store.utils.ShoppingCart;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;

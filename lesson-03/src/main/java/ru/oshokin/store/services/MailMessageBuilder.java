@@ -1,10 +1,10 @@
 package ru.oshokin.store.services;
 
-import ru.oshokin.store.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import ru.oshokin.store.entities.Order;
 
 @Service
 public class MailMessageBuilder {

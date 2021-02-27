@@ -1,9 +1,9 @@
 package ru.oshokin.store.entities;
 
 
-import ru.oshokin.store.validation.FieldMatch;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.oshokin.store.validation.FieldMatch;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

@@ -6,9 +6,9 @@ VALUES
 
 INSERT INTO users (username, password, first_name, last_name, email, phone)
 VALUES
-/* mydickisbig */
-('ogel', '$2y$12$sUJeGO5EVA6wdpmle3Q1ZOrXXXBhS8uT50pVxK4moUOdaNf3q4I2C', 'Oleg', 'Shokin', 'un_mapache_rabioso@hotmail.com', '911'),
-/* myturbanisdirty */
-('basilio', '$2y$12$g2SBkfX/L8axsnjARlDABOy1rPNs0f20f5WLnrjgh7Qod09DzHM86', 'Vasya', 'Lozhkin', 'vasya_lozhkin@sobaka.ru', '03'),
-/* urmomlovesme */
-('totsamiy', '$2y$12$XCidq4WiBrc/SDkmYv9CW.puMwrDftHo4H5SOd0exwmsUj9j7y3AW', 'Tot', 'Samiy', 'tot_samiy_syn_maminoy@podrugi.ru', '6-0-6-0-6');
+/* 123 */
+('ogel', '$2a$10$QJnxfYhKO/hgoMU1jl7q2Oi6JrmoLfP7cK5LtG9v4mheObEGq2jKS', 'Oleg', 'Shokin', 'un_mapache_rabioso@hotmail.com', '911'),
+/* 123 */
+('basilio', '$2a$10$QJnxfYhKO/hgoMU1jl7q2Oi6JrmoLfP7cK5LtG9v4mheObEGq2jKS', 'Vasya', 'Lozhkin', 'vasya_lozhkin@sobaka.ru', '03'),
+/* 123 */
+('totsamiy', '$2a$10$QJnxfYhKO/hgoMU1jl7q2Oi6JrmoLfP7cK5LtG9v4mheObEGq2jKS', 'Tot', 'Samiy', 'tot_samiy_syn_maminoy@podrugi.ru', '6-0-6-0-6');

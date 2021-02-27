@@ -1,11 +1,5 @@
 package ru.oshokin.store.services;
 
-import ru.oshokin.store.entities.Role;
-import ru.oshokin.store.entities.SystemUser;
-import ru.oshokin.store.entities.User;
-import ru.oshokin.store.repositories.RoleGrpcRepository;
-import ru.oshokin.store.repositories.RoleRepository;
-import ru.oshokin.store.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.oshokin.store.entities.Role;
+import ru.oshokin.store.entities.SystemUser;
+import ru.oshokin.store.entities.User;
+import ru.oshokin.store.repositories.RoleGrpcRepository;
+import ru.oshokin.store.repositories.RoleRepository;
+import ru.oshokin.store.repositories.UserRepository;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,8 +24,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder;
-
-    private RoleGrpcRepository roleGrpcRepository;
+    private RoleGrpcRepository roleGRPCRepository;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -38,8 +37,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    public void setRepository(RoleGrpcRepository roleGrpcRepository) {
-        this.roleGrpcRepository = roleGrpcRepository;
+    public void setRoleGRPCRepository(RoleGrpcRepository roleGRPCRepository) {
+        this.roleGRPCRepository = roleGRPCRepository;
     }
 
     @Autowired
@@ -68,8 +67,10 @@ public class UserServiceImpl implements UserService {
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
 
-
-        user.setRoles(Arrays.asList(roleGrpcRepository.findOneByName("ROLE_EMPLOYEE")));
+        //1. Доработать портал и с помощью grpc передавать роли пользователя.
+        user.setRoles(Arrays.asList(roleGRPCRepository.findOneByName("ROLE_EMPLOYEE")));
+        //видимо было так, до изменений
+        //user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_EMPLOYEE")));
 
         userRepository.save(user);
         return true;

@@ -1,8 +1,8 @@
 package ru.oshokin.store.repositories;
 
-import ru.oshokin.store.entities.DeliveryAddress;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import ru.oshokin.store.entities.DeliveryAddress;
 
 import java.util.List;
 

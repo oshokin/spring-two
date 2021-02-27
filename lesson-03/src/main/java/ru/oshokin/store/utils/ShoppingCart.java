@@ -1,8 +1,8 @@
 package ru.oshokin.store.utils;
 
+import lombok.Data;
 import ru.oshokin.store.entities.OrderItem;
 import ru.oshokin.store.entities.Product;
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;

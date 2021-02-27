@@ -1,11 +1,13 @@
 package ru.oshokin.store.services;
 
-import ru.oshokin.store.entities.Product;
-import ru.oshokin.store.utils.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.oshokin.store.entities.OrderItem;
+import ru.oshokin.store.entities.Product;
+import ru.oshokin.store.utils.ShoppingCart;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class ShoppingCartService {
@@ -27,6 +29,16 @@ public class ShoppingCartService {
 
     public void resetCart(HttpSession session) {
         session.removeAttribute("cart");
+    }
+
+    public int getQuantityProduct(HttpSession session) {
+        ShoppingCart cart = getCurrentCart(session);
+        int count = 0;
+        List<OrderItem> items = cart.getItems();
+        for (int i = 0; i < cart.getItems().size(); i++) {
+            count += items.get(i).getQuantity();
+        }
+        return count;
     }
 
     public void addToCart(HttpSession session, Long productId) {
