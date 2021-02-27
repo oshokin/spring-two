@@ -1,12 +1,11 @@
 package ru.oshokin.store.entities;
 
-public class Greeting {
+public class OutcomingMessageJS {
 
     private int id;
-
     private String content;
 
-    public Greeting(String content) {
+    public OutcomingMessageJS(String content) {
         this.content = content;
     }
 

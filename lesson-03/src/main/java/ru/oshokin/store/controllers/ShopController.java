@@ -1,13 +1,15 @@
 package ru.oshokin.store.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.oshokin.store.entities.DeliveryAddress;
-import ru.oshokin.store.entities.Greeting;
+import ru.oshokin.store.entities.OutcomingMessageJS;
 import ru.oshokin.store.entities.Order;
 import ru.oshokin.store.entities.User;
+import ru.oshokin.store.interfaces.IWebSocketMessenger;
 import ru.oshokin.store.services.*;
 import ru.oshokin.store.utils.CommonUtils;
 
@@ -30,6 +32,12 @@ public class ShopController {
     private ProductService productService;
     private ShoppingCartService shoppingCartService;
     private DeliveryAddressService deliverAddressService;
+    private IWebSocketMessenger wsEndPoint;
+
+    @Autowired
+    public void setControllerWs(IWebSocketMessenger wsEndPoint) {
+        this.wsEndPoint = wsEndPoint;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -122,8 +130,19 @@ public class ShopController {
     @GetMapping("/cart/add/{id}")
     public String addProductToCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
         shoppingCartService.addToCart(httpServletRequest.getSession(), id);
+        String finalCount = String.valueOf(shoppingCartService.getQuantityProduct(httpServletRequest.getSession()));
+        sendWebSocketMessage(String.format("Товаров в корзинке: %s", finalCount));
         String referrer = httpServletRequest.getHeader("referer");
         return "redirect:" + referrer;
+    }
+
+    @Async
+    private void sendWebSocketMessage(String message) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+        }
+        wsEndPoint.sendMessage("/topic/messages", new OutcomingMessageJS(message));
     }
 
     @GetMapping("/order/fill")
