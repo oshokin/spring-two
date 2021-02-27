@@ -1,6 +1,6 @@
 package ru.oshokin.store.entities;
 
-public class Message {
+public class IncomingMessageJS {
     private String name;
 
     public String getName() {
