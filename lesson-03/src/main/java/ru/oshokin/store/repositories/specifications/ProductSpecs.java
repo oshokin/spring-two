@@ -1,7 +1,7 @@
 package ru.oshokin.store.repositories.specifications;
 
-import ru.oshokin.store.entities.Product;
 import org.springframework.data.jpa.domain.Specification;
+import ru.oshokin.store.entities.Product;
 
 public class ProductSpecs {
     public static Specification<Product> titleContains(String word) {

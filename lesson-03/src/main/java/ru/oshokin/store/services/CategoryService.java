@@ -1,9 +1,9 @@
 package ru.oshokin.store.services;
 
-import ru.oshokin.store.entities.Category;
-import ru.oshokin.store.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.oshokin.store.entities.Category;
+import ru.oshokin.store.repositories.CategoryRepository;
 
 import java.util.List;
 

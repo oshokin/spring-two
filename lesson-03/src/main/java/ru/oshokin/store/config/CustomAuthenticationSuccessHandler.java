@@ -1,11 +1,11 @@
 package ru.oshokin.store.config;
 
-import ru.oshokin.store.entities.User;
-import ru.oshokin.store.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import ru.oshokin.store.entities.User;
+import ru.oshokin.store.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		User theUser = userService.findByUserName(userName);
 		HttpSession session = request.getSession();
 		session.setAttribute("user", theUser);
-		if(!request.getHeader("referer").contains("login")) {
+		if (!request.getHeader("referer").contains("login")) {
 			response.sendRedirect(request.getHeader("referer"));
 		} else {
 			response.sendRedirect(request.getContextPath() + "/shop");

@@ -1,9 +1,9 @@
 package ru.oshokin.store.services;
 
-import ru.oshokin.store.entities.OrderStatus;
-import ru.oshokin.store.repositories.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.oshokin.store.entities.OrderStatus;
+import ru.oshokin.store.repositories.OrderStatusRepository;
 
 @Service
 public class OrderStatusService {

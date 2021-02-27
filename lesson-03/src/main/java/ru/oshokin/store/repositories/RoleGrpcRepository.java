@@ -1,11 +1,11 @@
 package ru.oshokin.store.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.oshokin.store.RolesRequest;
 import ru.oshokin.store.RolesResponse;
 import ru.oshokin.store.RolesServiceGrpc;
 import ru.oshokin.store.entities.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
 public class RoleGrpcRepository {
@@ -20,12 +20,13 @@ public class RoleGrpcRepository {
         RolesRequest request = buildMsg(theRoleName);
         RolesServiceGrpc.RolesServiceBlockingStub stub = RolesServiceGrpc.newBlockingStub(provider.getConnection());
         RolesResponse response = stub.getRoles(request);
-        return new Role(Long.valueOf(response.getId()), response.getName());
+        Role funcResult = null;
+        if (response.getId() > 0) funcResult = new Role(Long.valueOf(response.getId()), response.getName());
+        return funcResult;
     }
 
     private RolesRequest buildMsg(String roleName) {
-        return RolesRequest.newBuilder()
-                .setName(roleName)
-                .build();
+        return RolesRequest.newBuilder().setName(roleName).build();
     }
+
 }

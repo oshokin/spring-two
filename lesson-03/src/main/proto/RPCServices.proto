@@ -12,5 +12,5 @@ message RolesResponse {
 }
 
 service RolesService {
-    rpc getRoles(RolesRequest) returns (RolesResponse);
+  rpc getRoles(RolesRequest) returns (RolesResponse);
 }

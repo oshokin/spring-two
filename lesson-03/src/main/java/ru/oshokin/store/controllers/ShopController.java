@@ -1,16 +1,13 @@
 package ru.oshokin.store.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.oshokin.store.entities.DeliveryAddress;
+import ru.oshokin.store.entities.Greeting;
 import ru.oshokin.store.entities.Order;
-import ru.oshokin.store.entities.Product;
 import ru.oshokin.store.entities.User;
-import ru.oshokin.store.repositories.specifications.ProductSpecs;
 import ru.oshokin.store.services.*;
 import ru.oshokin.store.utils.CommonUtils;
 
@@ -20,12 +17,11 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/shop")
 public class ShopController {
-    private static final int INITIAL_PAGE = 0;
+    private static final int INITIAL_PAGE = 1;
     private static final int PAGE_SIZE = 5;
 
     private MailService mailService;
