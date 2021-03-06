@@ -1,1 +1,1 @@
-# GeekBrains internet store app
+# O.Shokin internet store app
