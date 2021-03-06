@@ -1,6 +1,10 @@
 package ru.oshokin.store.utils;
 
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 import ru.oshokin.store.entities.OrderItem;
 import ru.oshokin.store.entities.Product;
 
@@ -8,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Component
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCart {
     private List<OrderItem> items;
     private Double totalCost;
@@ -29,6 +35,7 @@ public class ShoppingCart {
             items.add(orderItem);
         }
         orderItem.setQuantity(orderItem.getQuantity() + 1);
+        //теперь вызываем из аспекта
         recalculate();
     }
 
@@ -38,6 +45,7 @@ public class ShoppingCart {
             return;
         }
         orderItem.setQuantity(quantity);
+        //теперь вызываем из аспекта
         recalculate();
     }
 
@@ -47,10 +55,12 @@ public class ShoppingCart {
             return;
         }
         items.remove(orderItem);
+        //теперь вызываем из аспекта
         recalculate();
     }
 
-    private void recalculate() {
+    //теперь вызываем из аспекта
+    public void recalculate() {
         totalCost = 0.0;
         for (OrderItem o : items) {
             o.setTotalPrice(o.getQuantity() * o.getProduct().getPrice());

@@ -26,9 +26,19 @@ public class ShoppingCartService {
         }
         return cart;
     }
+    public void setProductCount(HttpSession session, Long productId, Long quantity) {
+        ShoppingCart cart = getCurrentCart(session);
+        Product product = productService.getProductById(productId);
+        cart.setQuantity(product, quantity);
+    }
 
-    public void resetCart(HttpSession session) {
-        session.removeAttribute("cart");
+    public void setProductCount(HttpSession session, Product product, Long quantity) {
+        ShoppingCart cart = getCurrentCart(session);
+        cart.setQuantity(product, quantity);
+    }
+
+    public double getTotalCost(HttpSession session) {
+        return getCurrentCart(session).getTotalCost();
     }
 
     public int getQuantityProduct(HttpSession session) {
@@ -39,6 +49,11 @@ public class ShoppingCartService {
             count += items.get(i).getQuantity();
         }
         return count;
+    }
+
+
+    public void resetCart(HttpSession session) {
+        session.removeAttribute("cart");
     }
 
     public void addToCart(HttpSession session, Long productId) {
@@ -61,18 +76,8 @@ public class ShoppingCartService {
         cart.remove(product);
     }
 
-    public void setProductCount(HttpSession session, Long productId, Long quantity) {
-        ShoppingCart cart = getCurrentCart(session);
-        Product product = productService.getProductById(productId);
-        cart.setQuantity(product, quantity);
+    public void recalculate(HttpSession session) {
+        getCurrentCart(session).recalculate();
     }
 
-    public void setProductCount(HttpSession session, Product product, Long quantity) {
-        ShoppingCart cart = getCurrentCart(session);
-        cart.setQuantity(product, quantity);
-    }
-
-    public double getTotalCost(HttpSession session) {
-        return getCurrentCart(session).getTotalCost();
-    }
 }

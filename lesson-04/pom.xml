@@ -18,7 +18,7 @@
 		<app.path>/store</app.path>
 		<app.port>8189</app.port>
 		<jdbc.driver>com.mysql.cj.jdbc.Driver</jdbc.driver>
-		<jdbc.url>jdbc:mysql://192.168.0.109:3306/store?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</jdbc.url>
+		<jdbc.url>jdbc:mysql://192.168.0.22:3306/store?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</jdbc.url>
 		<jdbc.user>skiller3000</jdbc.user>
 		<jdbc.password>shakur3000</jdbc.password>
 		<jdbc.schema>store</jdbc.schema>
