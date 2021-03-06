@@ -1,5 +1,6 @@
 package ru.oshokin.store.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -10,16 +11,19 @@ import ru.oshokin.store.entities.OutcomingMessageJS;
 import ru.oshokin.store.entities.Order;
 import ru.oshokin.store.entities.User;
 import ru.oshokin.store.interfaces.IWebSocketMessenger;
+import ru.oshokin.store.rabbitmq.RabbitMQAgent;
 import ru.oshokin.store.services.*;
 import ru.oshokin.store.utils.CommonUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequestMapping("/shop")
 public class ShopController {
@@ -33,6 +37,7 @@ public class ShopController {
     private ShoppingCartService shoppingCartService;
     private DeliveryAddressService deliverAddressService;
     private IWebSocketMessenger wsEndPoint;
+    private RabbitMQAgent rabbitMQAgent;
 
     @Autowired
     public void setControllerWs(IWebSocketMessenger wsEndPoint) {
@@ -67,6 +72,11 @@ public class ShopController {
     @Autowired
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
+    }
+
+    @Autowired
+    public void setRabbitMQAgent(RabbitMQAgent rabbitMQAgent) {
+        this.rabbitMQAgent = rabbitMQAgent;
     }
 
     @GetMapping
@@ -171,6 +181,7 @@ public class ShopController {
         order.setDeliveryPrice(0.0);
         order = orderService.saveOrder(order);
         model.addAttribute("order", order);
+        showCartMessages();
         return "order-filler";
     }
 
@@ -189,4 +200,17 @@ public class ShopController {
         model.addAttribute("order", confirmedOrder);
         return "order-result";
     }
+
+    @Async
+    private void showCartMessages() {
+        try {
+            while (rabbitMQAgent.hasNext()) {
+                String message = rabbitMQAgent.getMessage();
+                log.info(message);
+            }
+        } catch (IOException e) {
+            log.error("We've just killed RabbitMQ: {}", e.getMessage());
+        }
+    }
+
 }

@@ -6,14 +6,20 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpSession;
+
+import ru.oshokin.store.rabbitmq.RabbitMQAgent;
 import ru.oshokin.store.services.ShoppingCartService;
 
 @Aspect
 @Component
 @Slf4j
 public class CartAspect {
+
+    @Autowired
+    private RabbitMQAgent rabbitMQAgent;
 
     @Before("execution(* ru.oshokin.store.services.ShoppingCartService.*(..))")
     public void beforeAnyCartMethodInvokation(JoinPoint point) {

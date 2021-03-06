@@ -26,6 +26,9 @@
 		<mail.user>shokinoleg@gmail.com</mail.user>
 		<mail.password>123</mail.password>
         <app.grpc.roles.port>9080</app.grpc.roles.port>
+        <rabbitmq.uri>amqp://admin:shakur3000@192.168.0.22:5672</rabbitmq.uri>
+        <rabbitmq.exchange>shopcart</rabbitmq.exchange>
+        <rabbitmq.queue>shopcart</rabbitmq.queue>
     </properties>
     <dependencies>
         <dependency>
@@ -47,6 +50,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,10 +96,6 @@
             <version>1.2.2</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>3.4.5</version>
@@ -119,10 +126,6 @@
             <version>1.35.0</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator-core</artifactId>
         </dependency>
@@ -145,6 +148,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>3.1.1-1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
