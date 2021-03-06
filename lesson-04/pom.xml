@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.oshokin</groupId>
-    <artifactId>lesson-03</artifactId>
+    <artifactId>lesson-04</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>lesson-03</name>
+    <name>lesson-04</name>
     <description>store</description>
     <properties>
         <java.version>1.8</java.version>
