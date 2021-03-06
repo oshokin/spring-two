@@ -1,21 +1,32 @@
 package ru.oshokin.store.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.oshokin.store.entities.OrderItem;
 import ru.oshokin.store.entities.Product;
+import ru.oshokin.store.rabbitmq.RabbitMQAgent;
 import ru.oshokin.store.utils.ShoppingCart;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ShoppingCartService {
+
     private ProductService productService;
+    private RabbitMQAgent rabbitMQAgent;
 
     @Autowired
     public void setProductService(ProductService productService) {
         this.productService = productService;
+    }
+
+    @Autowired
+    public void setRabbitMQAgent(RabbitMQAgent rabbitMQAgent) {
+        this.rabbitMQAgent = rabbitMQAgent;
     }
 
     public ShoppingCart getCurrentCart(HttpSession session) {
@@ -64,6 +75,12 @@ public class ShoppingCartService {
     public void addToCart(HttpSession session, Product product) {
         ShoppingCart cart = getCurrentCart(session);
         cart.add(product);
+        try {
+            rabbitMQAgent.sendMessage(String.format("В корзину добавлен товар \"%s\" за %.2f RUB/шт.", product.getTitle(), product.getPrice()));
+        } catch (IOException e) {
+            log.error("Uyy, no, ahora tendras que leerlo todo esto: {}", e.getMessage());
+        }
+
     }
 
     public void removeFromCart(HttpSession session, Long productId) {
