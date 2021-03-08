@@ -38,6 +38,7 @@ public class ShoppingCartService {
         }
         return cart;
     }
+
     public void setProductCount(HttpSession session, Long productId, Long quantity) {
         ShoppingCart cart = getCurrentCart(session);
         Product product = productService.getProductById(productId);
@@ -62,7 +63,6 @@ public class ShoppingCartService {
         }
         return count;
     }
-
 
     public void resetCart(HttpSession session) {
         session.removeAttribute("cart");
